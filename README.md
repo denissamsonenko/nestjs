@@ -20,6 +20,9 @@ Auth app with docker
 ## Libs
 * @nestjs/config
 * cross-env
+* @nestjs/swagger
+* swagger-ui-express
+
 
 
 ## Running the app
