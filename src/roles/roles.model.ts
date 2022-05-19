@@ -1,4 +1,4 @@
-import { Column, DataType, Table, Model, BelongsToMany } from 'sequelize-typescript';
+import { BelongsToMany, Column, DataType, Model, Table } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
 import { User } from '../users/users.model';
 import { UserRoles } from './user-roles.model';
@@ -9,40 +9,40 @@ interface RoleCreationAttr {
 }
 
 @Table({
-  tableName: 'roles'
+  tableName: 'roles',
 })
-export class Role extends Model<Role, RoleCreationAttr>{
+export class Role extends Model<Role, RoleCreationAttr> {
 
   @ApiProperty({
-    example: '1', description: 'Unique id'
+    example: '1', description: 'Unique id',
   })
   @Column({
     type: DataType.INTEGER,
     unique: true,
     autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
   })
-  id: number
+  id: number;
 
   @ApiProperty({
-    example: 'ADMIN', description: 'Role name'
+    example: 'ADMIN', description: 'Role name',
   })
   @Column({
     type: DataType.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
   })
-  value: string
+  value: string;
 
   @ApiProperty({
-    example: 'Administrator', description: 'Role description'
+    example: 'Administrator', description: 'Role description',
   })
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
-  description: string
+  description: string;
 
-  @BelongsToMany(() => User, ()=> UserRoles)
-  users: User[]
+  @BelongsToMany(() => User, () => UserRoles)
+  users: User[];
 }
