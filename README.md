@@ -22,6 +22,9 @@ Auth app with docker
 * cross-env
 * @nestjs/swagger
 * swagger-ui-express
+* @nestjs/jwt
+* bcryptjs
+
 
 
 
