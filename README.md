@@ -26,10 +26,8 @@ Auth app with docker
 * bcryptjs
 * class-validator
 * class-transformer
-
-
-
-
+* uuid
+* @nestjs/serve-static
 
 ## Running the app
 
