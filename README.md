@@ -18,6 +18,7 @@ Auth app with docker
 ```
 
 ## Libs
+
 * @nestjs/config
 * cross-env
 * @nestjs/swagger
@@ -28,6 +29,14 @@ Auth app with docker
 * class-transformer
 * uuid
 * @nestjs/serve-static
+
+## Docker commands
+
+```bash
+* docker-compose build
+* docker compose up
+* docker compose down
+```
 
 ## Running the app
 
