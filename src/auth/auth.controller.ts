@@ -4,7 +4,7 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 import { AuthService } from './auth.service';
 
 @ApiTags(
-  'Authorization'
+  'Authorization',
 )
 @Controller('auth')
 export class AuthController {
@@ -12,12 +12,12 @@ export class AuthController {
   }
 
   @Post('/login')
-  login(@Body() userDto: CreateUserDto){
-    return this.authService.login(userDto)
+  login(@Body() userDto: CreateUserDto) {
+    return this.authService.login(userDto);
   }
 
   @Post('/registration')
-  registration(@Body() userDto: CreateUserDto){
-    return this.authService.registration(userDto)
+  registration(@Body() userDto: CreateUserDto) {
+    return this.authService.registration(userDto);
   }
 }

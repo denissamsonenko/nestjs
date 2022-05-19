@@ -24,6 +24,9 @@ Auth app with docker
 * swagger-ui-express
 * @nestjs/jwt
 * bcryptjs
+* class-validator
+* class-transformer
+
 
 
 

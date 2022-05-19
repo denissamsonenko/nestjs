@@ -1,13 +1,13 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, UsePipes } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './users.model';
-import { JwtAuthGuard } from '../auth/jwt.auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.auth.decorator';
 import { AddRoleDto } from './dto/add-role.dto';
 import { BanUserDto } from './dto/ban-user.dto';
+import { ValidationPipe } from '../pipes/validation.pipe';
 
 @ApiTags('Users')
 @Controller('users')
@@ -16,54 +16,55 @@ export class UsersController {
   }
 
   @ApiOperation({
-    summary: 'Create user'
+    summary: 'Create user',
   })
   @ApiResponse({
     status: 200,
-    type: User
+    type: User,
   })
+  @UsePipes(ValidationPipe)
   @Post()
-  create(@Body() userDto: CreateUserDto){
-    return this.userService.createUser(userDto)
+  create(@Body() userDto: CreateUserDto) {
+    return this.userService.createUser(userDto);
   }
 
   @ApiOperation({
-    summary: 'Get all users'
+    summary: 'Get all users',
   })
   @ApiResponse({
     status: 200,
-    type: [User]
+    type: [User],
   })
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Get()
-  getAllUsers(){
-    return this.userService.getAllUsers()
+  getAllUsers() {
+    return this.userService.getAllUsers();
   }
 
   @ApiOperation({
-    summary: 'Set role'
+    summary: 'Set role',
   })
   @ApiResponse({
-    status: 200
+    status: 200,
   })
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Post('/role')
-  addRole(@Body() dto: AddRoleDto){
-    return this.userService.addRole(dto)
+  addRole(@Body() dto: AddRoleDto) {
+    return this.userService.addRole(dto);
   }
 
   @ApiOperation({
-    summary: 'Ban user'
+    summary: 'Ban user',
   })
   @ApiResponse({
-    status: 200
+    status: 200,
   })
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Post('/ban')
-  ban(@Body() dto: BanUserDto){
-    return this.userService.ban(dto)
+  ban(@Body() dto: BanUserDto) {
+    return this.userService.ban(dto);
   }
 }

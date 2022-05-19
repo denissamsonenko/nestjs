@@ -4,15 +4,16 @@ import { CreateRoleDto } from '../users/dto/create-role.dto';
 
 @Controller('roles')
 export class RolesController {
-  constructor(private rolesService: RolesService) {}
+  constructor(private rolesService: RolesService) {
+  }
 
   @Post()
-  create(@Body() dto: CreateRoleDto){
-    return this.rolesService.createRole(dto)
+  create(@Body() dto: CreateRoleDto) {
+    return this.rolesService.createRole(dto);
   }
 
   @Get('/:value')
-  getByValue(@Param('value') value: string){
-    return this.rolesService.getRoleByValue(value)
+  getByValue(@Param('value') value: string) {
+    return this.rolesService.getRoleByValue(value);
   }
 }

@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@n
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcryptjs'
+import * as bcrypt from 'bcryptjs';
 import { User } from '../users/users.model';
 
 
@@ -14,41 +14,41 @@ export class AuthService {
   }
 
   async login(userDto: CreateUserDto) {
-    const user = await this.validateUser(userDto)
+    const user = await this.validateUser(userDto);
 
-    return this.generateToken(user)
+    return this.generateToken(user);
   }
 
   async registration(userDto: CreateUserDto) {
-    const candidate = await this.userService.getUserByEmail(userDto.email)
+    const candidate = await this.userService.getUserByEmail(userDto.email);
 
-    if(candidate){
-      throw new HttpException('This user already exist 🙀', HttpStatus.BAD_REQUEST)
+    if (candidate) {
+      throw new HttpException('This user already exist 🙀', HttpStatus.BAD_REQUEST);
     }
 
-    const bcryptPass = await bcrypt.hash(userDto.password, 5)
+    const bcryptPass = await bcrypt.hash(userDto.password, 5);
 
-    const user = await this.userService.createUser({...userDto, password: bcryptPass})
+    const user = await this.userService.createUser({ ...userDto, password: bcryptPass });
 
-    return this.generateToken(user)
+    return this.generateToken(user);
   }
 
   private async generateToken(user: User) {
-    const payload = { email: user.email, id: user.id, roles: user.roles}
+    const payload = { email: user.email, id: user.id, roles: user.roles };
 
     return {
-      token: this.jwtService.sign(payload)
-    }
+      token: this.jwtService.sign(payload),
+    };
   }
 
   private async validateUser(userDto: CreateUserDto) {
-    const user = await this.userService.getUserByEmail(userDto.email)
+    const user = await this.userService.getUserByEmail(userDto.email);
 
-    const passwordEquals = await bcrypt.compare(userDto.password, user.password)
+    const passwordEquals = await bcrypt.compare(userDto.password, user.password);
 
-    if(user && passwordEquals) {
-      return user
+    if (user && passwordEquals) {
+      return user;
     }
-    throw  new UnauthorizedException({message: 'Incorrect email or password'})
+    throw  new UnauthorizedException({ message: 'Incorrect email or password' });
   }
 }
